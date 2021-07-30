@@ -20,7 +20,16 @@ const postLongQuiz = async (req, res, next) => {
 const getLongQuizAll = async (req, res, next) => {
     try {
         const options = req.query;
-        const quizs = await Quiz.find(options);
+        let quizs;
+
+        if (Object.keys(options).includes('limit')) {
+            const limit = parseInt(options['limit']);
+            delete options['limit'];
+            quizs = await Quiz.find(options).limit(limit);
+        } else {
+            quizs = await Quiz.find(options);
+        }
+        
         await res.status(200).json({
             ...ResponseObject['Success']['Success'],
             'quizs': quizs

@@ -20,14 +20,20 @@
    > npm install
    ```
 
-3. 환경변수 설정 - `.env` 파일 생성
+3. Mongo DB 설치
+
+   - MongoDB Community Server
+   - MongoDB Compass (선택)
+   - https://www.mongodb.com/try/download
+
+4. 환경변수 설정 - `.env` 파일 생성
 
    ```
-   DATABASE_URL=(Mongo DB 로컬 URL)
+   DATABASE_URL=(Mongo DB 로컬 URL : mongodb://locahost:27017/)
    PORT=(사용할 포트 번호)
    ```
 
-4. `bin/www` 파일 실행
+5. `bin/www` 파일 실행
 
    ```bash
    > node bin/www
@@ -74,6 +80,7 @@
 | :--------------: | :-------------: | :--------: | :------: |
 |    퀴즈 문제     | `quizQuestion`  |  `String`  |   필수   |
 |    퀴즈 정답     |  `quizAnswer`   |  `Number`  |   필수   |
+|   퀴즈 선택지    | `quizSelection` |  `Array`   |   필수   |
 |  퀴즈 카테고리   | `quizCategory`  |  `Array`   |   필수   |
 | 퀴즈 플레이 횟수 | `quizPlayCount` |  `Number`  |          |
 |  퀴즈 생성 시점  |   `createdAt`   |   `Date`   |          |
@@ -91,17 +98,24 @@
 
 **퀴즈 API Base URI** : `api/quiz/(퀴즈 타입 : short, long, select)`
 
+**랜덤 퀴즈 Base URL** : `http://localhost:(포트번호)/api/quiz/random` (GET)
+
+- 단답형, 서술형, 객관식 퀴즈 각각의 최신 퀴즈 10개를 불러와서 그중 무작위로 5개를 선택해 넘겨준다.
+- 퀴즈 개수의 합이 5개 미만이라면 에러를 넘겨준다.
+
+
+
 단답형, 서술형, 객관식 퀴즈 모두 퀴즈 타입을 제외하면 동일한 CRUD Endpoint를 가진다.
 
 `quizId`는 Mongo DB에서 제공하는 `_id`를 의미한다.
 
-| **Endpoint** | **HTTP Method** |         **설명**          |
-| :----------: | :-------------: | :-----------------------: |
-|     `/`      |      POST       |    퀴즈를 생성합니다.     |
-|     `/`      |       GET       | 퀴즈 리스트를 가져옵니다. |
-|  `/:quizId`  |       GET       |  특정 퀴즈를 가져옵니다.  |
-|  `/:quizId`  |       PUT       |  특정 퀴즈를 변경합니다.  |
-|  `/:quizId`  |     DELETE      |  특정 퀴즈를 제거합니다.  |
+| **Endpoint** | **HTTP Method** |                           **설명**                           |
+| :----------: | :-------------: | :----------------------------------------------------------: |
+|     `/`      |      POST       |                      퀴즈를 생성합니다.                      |
+| `/?limit=1`  |       GET       | 퀴즈 리스트를 가져옵니다.<br />Query로 `limit`를 입력하면 가져올 데이터 양을 제한합니다. |
+|  `/:quizId`  |       GET       |                   특정 퀴즈를 가져옵니다.                    |
+|  `/:quizId`  |       PUT       |                   특정 퀴즈를 변경합니다.                    |
+|  `/:quizId`  |     DELETE      |                   특정 퀴즈를 제거합니다.                    |
 
 
 
@@ -120,5 +134,3 @@
         "quizCategory" : ["운영체제", "컴퓨터", "프로그래밍"]
     }
     ```
-
-    
