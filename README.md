@@ -29,7 +29,7 @@
 4. 환경변수 설정 - `.env` 파일 생성
 
    ```
-   DATABASE_URL=(Mongo DB 로컬 URL : mongodb://locahost:27017/)
+   DATABASE_URL=(Mongo DB 로컬 URL : mongodb://localhost:27017/)
    PORT=(사용할 포트 번호)
    ```
 
