@@ -13,7 +13,7 @@ router.use('/short', require('./quiz/shortQuiz'));
 router.use('/long', require('./quiz/longQuiz'));
 router.use('/select', require('./quiz/selectQuiz'));
 
-router.use('/random', async (req, res, next) => {
+router.get('/random', async (req, res, next) => {
     try {
         const shortQuizs = await shortQuiz.find().limit(10)
         const longQuizs = await longQuiz.find().limit(10)
