@@ -98,6 +98,10 @@
 
 **퀴즈 API Base URI** : `api/quiz/(퀴즈 타입 : short, long, select)`
 
+- `http://localhost:(포트번호)/api/quiz/short`
+- `http://localhost:(포트번호)/api/quiz/long`
+- `http://localhost:(포트번호)/api/quiz/select`
+
 **랜덤 퀴즈 Base URL** : `http://localhost:(포트번호)/api/quiz/random` (GET)
 
 - 단답형, 서술형, 객관식 퀴즈 각각의 최신 퀴즈 10개를 불러와서 그중 무작위로 5개를 선택해 넘겨준다.
