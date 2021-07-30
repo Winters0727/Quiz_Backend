@@ -22,9 +22,9 @@ router.get('/random', async (req, res, next) => {
         const quizs = [...shortQuizs, ...longQuizs, ...selectQuizs]
 
         if (quizs.length < 5) {
-            await res.status(500).json({
-                ...ResponseObject['Server']['ServerError'],
-                'error' : '퀴즈의 개수가 5개 미만입니다.'
+            await res.status(200).json({
+                ...ResponseObject['Success']['Success'],
+                'quiz': quizs
             });
             return
         }
